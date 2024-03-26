@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRCS_LIBFT = libft/ft_strncmp.c libft/ft_strlen.c libft/ft_split.c libft/ft_putstr_fd.c libft/ft_strjoin.c libft/ft_strdup.c libft/ft_substr.c 
 SRCS = Mandatory/main.c Mandatory/utils.c Mandatory/pipex.c 
 SRCS_BONUS = Bonus/main.c Bonus/utils.c Bonus/pipex_bonus.c Bonus/utils2.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

@@ -16,9 +16,9 @@ void	exit_err(int i, char *err)
 {
 	if (i == 2)
 	{
-		ft_putstr_fd("Error: Bad argument\n", 1);
-		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <...> <file2>\n", 1);
-		ft_putstr_fd("./pipex here_doc <LIMITER> <cmd> <cmd1> <...> <file>", 1);
+		ft_putstr_fd("Error: Bad argument\n", 2);
+		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <...> <file2>\n", 2);
+		ft_putstr_fd("./pipex here_doc <LIMITER> <cmd> <cmd1> <...> <file>", 2);
 		exit (EXIT_FAILURE);
 	}
 	if (i == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kait-baa <kait-baa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loki <loki@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:57:48 by kait-baa          #+#    #+#             */
-/*   Updated: 2024/03/26 01:35:30 by kait-baa         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:35:24 by loki             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,15 @@ int	main(int argc, char *argv[], char *envp[])
 			p_pipex(i++, &pipex);
 		close(pipex.fd[1]);
 		close(pipex.fd[0]);
-		while (wait(&status) != -1)
+		while (waitpid(pipex.pid, &status, 0) != -1)
 			;
 		ft_error_free(&pipex);
-		return (status);
 	}
 	else
 	{
-		ft_putstr_fd("Error: Bad argument\n", 1);
-		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+		ft_putstr_fd("Error: Bad argument\n", 2);
+		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 2);
 		return (status);
 	}
-	return (0);
+	return (status);
 }

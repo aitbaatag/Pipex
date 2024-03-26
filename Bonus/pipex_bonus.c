@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kait-baa <kait-baa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loki <loki@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:56:58 by kait-baa          #+#    #+#             */
-/*   Updated: 2024/03/23 11:22:04 by kait-baa         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:46:26 by loki             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execute_command(t_pipex *pipex, int *fd)
 	}
 	if (dup2(fd[1], STDOUT_FILENO) < 0)
 		perror("error.\n");
-	execve (pipex->path, pipex->cmd, NULL);
+	execve (pipex->path, pipex->cmd, pipex->envp);
 	perror("execve failed \n");
 	ft_error_free(pipex, 1);
 	exit(EXIT_FAILURE);
@@ -52,7 +52,7 @@ void	first_child_process(t_pipex *pipex, int *fd)
 	close (fd[0]);
 	if (dup2(fd[1], STDOUT_FILENO) < 0)
 		perror("error.\n");
-	execve (pipex->path, pipex->cmd, NULL);
+	execve (pipex->path, pipex->cmd, pipex->envp);
 	perror("execve failed \n");
 	ft_error_free(pipex, 1);
 	exit(EXIT_FAILURE);
@@ -68,7 +68,7 @@ void	last_child_process(t_pipex *pipex)
 	}
 	if (dup2(pipex->outfile, STDOUT_FILENO) < 0)
 		perror("error\n");
-	execve (pipex->path, pipex->cmd, NULL);
+	execve (pipex->path, pipex->cmd, pipex->envp);
 	perror("execve failed \n");
 	ft_error_free(pipex, 1);
 	exit(EXIT_FAILURE);
