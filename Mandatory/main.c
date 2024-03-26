@@ -6,7 +6,7 @@
 /*   By: loki <loki@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:57:48 by kait-baa          #+#    #+#             */
-/*   Updated: 2024/03/26 15:35:24 by loki             ###   ########.fr       */
+/*   Updated: 2024/03/26 18:01:32 by loki             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ void	p_pipex(int i, t_pipex *pipex)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
-	int		status;
 	int		i;
 
 	i = 0;
-	status = 0;
 	if (argc == 5)
 	{
 		pipex_init(argv, envp, &pipex);
@@ -79,7 +77,7 @@ int	main(int argc, char *argv[], char *envp[])
 			p_pipex(i++, &pipex);
 		close(pipex.fd[1]);
 		close(pipex.fd[0]);
-		while (waitpid(pipex.pid, &status, 0) != -1)
+		while (wait(NULL) != -1)
 			;
 		ft_error_free(&pipex);
 	}
@@ -87,7 +85,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		ft_putstr_fd("Error: Bad argument\n", 2);
 		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 2);
-		return (status);
+		return (1);
 	}
-	return (status);
+	return (0);
 }
